@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzy.springcloud.dao.PaymentMapper">
+  <resultMap id="BaseResultMap" type="com.wzy.commons.entity.payment.Payment">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="serial" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, serial
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cloud_payment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cloud_payment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wzy.commons.entity.payment.Payment">
+    insert into cloud_payment ( serial)
+    values (#{serial,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wzy.commons.entity.payment.Payment">
+    insert into cloud_payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serial != null">
+        serial,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serial != null">
+        #{serial,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wzy.commons.entity.payment.Payment">
+    update cloud_payment
+    <set>
+      <if test="serial != null">
+        serial = #{serial,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wzy.commons.entity.payment.Payment">
+    update cloud_payment
+    set serial = #{serial,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
