@@ -47,4 +47,10 @@ public class PaymentController {
                     ,"没有对应数据,serverPort: ",payment);
         }
     }
+
+    @GetMapping(value = "/payment/lb")
+    public String getPaymentLB()
+    {
+        return serverPort;
+    }
 }
