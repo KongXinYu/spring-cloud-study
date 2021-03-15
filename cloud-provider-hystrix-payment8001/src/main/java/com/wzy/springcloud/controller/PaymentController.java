@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @description:
@@ -45,6 +46,15 @@ public class PaymentController {
     public String paymentInfoTimeOut(@PathVariable("id") Long id) {
         String result = paymentService.paymentInfoTimeout(id);
         log.info("*****result: " + result);
+        return result;
+    }
+
+    //====服务熔断
+    @GetMapping("/payment/circuit/{id}")
+    public String paymentCircuitBreaker(@PathVariable("id") Integer id)
+    {
+        String result = paymentService.paymentCircuitBreaker(id);
+        log.info("****result: "+result);
         return result;
     }
 }
