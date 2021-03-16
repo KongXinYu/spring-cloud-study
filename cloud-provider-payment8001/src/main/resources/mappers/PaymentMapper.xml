@@ -13,19 +13,19 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from cloud_payment
+    from payment
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from cloud_payment
+    delete from payment
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.wzy.commons.entity.payment.Payment">
-    insert into cloud_payment ( serial)
+    insert into payment ( serial)
     values (#{serial,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wzy.commons.entity.payment.Payment">
-    insert into cloud_payment
+    insert into payment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="serial != null">
         serial,
@@ -38,7 +38,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wzy.commons.entity.payment.Payment">
-    update cloud_payment
+    update payment
     <set>
       <if test="serial != null">
         serial = #{serial,jdbcType=VARCHAR},
@@ -47,7 +47,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wzy.commons.entity.payment.Payment">
-    update cloud_payment
+    update payment
     set serial = #{serial,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
